@@ -1,0 +1,25 @@
+const express = require('express');
+const cartController = require('../controllers/cartController');
+const { authenticateToken } = require('../utils/authUtils');
+
+const router = express.Router();
+
+// Route for adding a new product
+router.post('/products/:productId', authenticateToken, cartController.addProduct);
+
+// Route for getting all products in the cart
+router.get('/products', authenticateToken, cartController.getProducts);
+
+// Route for updating a product quantity
+router.put('/products/:productId', authenticateToken, cartController.updateProductQuantity);
+
+// Route for deleting a product
+router.delete('/products/:productId', authenticateToken, cartController.deleteProduct);
+
+// Route for deleting all products
+router.delete('/products', authenticateToken, cartController.deleteAllProducts);
+
+/*// Route for ordering
+router.post('/products', authenticateToken, cartController.orderProducts);*/
+
+module.exports = router;

@@ -1,0 +1,89 @@
+nav {
+    background: linear-gradient(to right, #950B0B, #440606);
+    color: #FFF;
+    .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        h2 {
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            margin: 0;
+            li {
+                cursor: pointer;
+                font-size: 22px;
+                color: #FFF;
+                text-decoration: none;
+            }
+            .user-circle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #4285f4;
+                color: #fff;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+                overflow: hidden;
+                transition: border-color 0.3s;
+                cursor: pointer;
+
+                &.shining {
+                    border: 2px solid transparent;
+                    border-radius: 70%;
+                    animation: shining-animation 1.5s infinite;
+                }
+                
+                  .dropdown-menu {
+                    top: 16%;
+                    transform: translateY(-50%);
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    padding: 10px;
+                    display: block;
+                
+                    ul {
+                      list-style-type: none;
+                      padding: 0;
+                      margin: 0;
+                      display: grid;
+                      li {
+                        margin-bottom: 5px;
+                        
+                        a {
+                          color: #333;
+                          text-decoration: none;
+                
+                          &:hover {
+                            color: #4285f4;
+                          }
+                        }
+                      }
+                    }
+                  }
+            }
+
+            @keyframes shining-animation {
+                0% {
+                  border-color: transparent;
+                }
+                50% {
+                  border-color: rgba(255, 255, 255, 0.7);
+                }
+                100% {
+                  border-color: transparent;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+<body>
+    <div class="authBox">
+        <main class="my-form">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card-header">
+                            <h1 class="text-danger">Register</h1>
+                        </div>
+                        <div class="card-body">
+                            <form (ngSubmit) = "register()">
+                                <div class="form-group row">
+                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">User Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="user_name" class="form-control" name="user-name" [(ngModel)]="userName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email_adresse" class="col-md-4 col-form-label text-md-right">Email Adresse</label>
+                                    <div class="col-md-6">
+                                        <input type="email" id="email_adresse" class="form-control" name="email-adresse" [(ngModel)]="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="confirm_password" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="confirm_password" class="form-control" name="confirm_password" [(ngModel)]="confirmPassword" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <button type = "submit" class="btn btn-primary" [disabled]="!passwordsMatch()">Submit</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="signin">
+                                        <p>Already have an account? <a routerLink = "/login">Sign in</a>.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="alert alert-danger" role="alert" *ngIf = "!passwordsMatch()">Passwords do not match</div>
+                                    <div class="alert alert-danger" role="alert" *ngIf = "error">{{errMessage}}</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>

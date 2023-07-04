@@ -1,0 +1,32 @@
+<div class="modal">
+    <div class="modal-content">
+      <h2 mat-dialog-title class="text-danger">Add Product</h2>
+      <form>
+        <div class="form-group">
+          <label>Photo</label>
+          <input type="file" id="photo" name="photo" accept="image/*" (change)="onPhotoSelected($event)">
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" class="form-control" [(ngModel)]="name">
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="quantity">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" class="form-control" [(ngModel)]="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate</label>
+          <input type="number" id="rate" name="rate" class="form-control" step="0.1" [(ngModel)]="rate">
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" name="price" class="form-control" step="0.01" [(ngModel)]="price">
+        </div>
+        <button class="btn btn-success" type="submit" (click)="addProduct()">Add</button>
+      </form>
+    </div>
+</div>
