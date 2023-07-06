@@ -22,4 +22,10 @@ router.delete('/products', authenticateToken, productController.deleteAllProduct
 // Route for getting all products for all users
 router.get('/allProducts', productController.getAllProducts);
 
+// Route for increasing quantity
+router.put('/products/increase/:productId', authenticateToken, productController.increaseQuantity);
+
+// Route for decreasing quantity
+router.put('/products/decrease/:productId', authenticateToken, productController.decreaseQuantity);
+
 module.exports = router;

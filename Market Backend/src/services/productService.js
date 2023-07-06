@@ -23,11 +23,11 @@ async function getProducts(userId) {
 }
 
 // Service function to update a product
-async function updateProduct(productId, description, userId) {
+async function updateProduct(productId, price, description, userId) {
     try {
       const product = await Product.findOneAndUpdate(
         { _id: productId, userId: userId },
-        { description },
+        { price, description },
         { new: true }
       );
   
@@ -76,11 +76,51 @@ async function getAllProductsRandomOrder() {
   }
 }
 
+// Service function to increase quantity
+async function increaseQuantity(productId, userId) {
+  try {
+    const product = await Product.findOneAndUpdate(
+      { _id: productId, userId: userId },
+      { $inc: { quantity: 1 } },
+      { new: true }
+    );
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error('Failed to update product');
+  }
+}
+
+// Service function to decrease quantity
+async function decreaseQuantity(productId, userId) {
+  try {
+    const product = await Product.findOneAndUpdate(
+      { _id: productId, userId: userId },
+      { $inc: { quantity: -1 } },
+      { new: true }
+    );
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error('Failed to update product');
+  }
+}
+
 module.exports = {
   addProduct,
   getProducts,
   updateProduct,
   deleteProduct,
   deleteAllProducts,
-  getAllProductsRandomOrder
+  getAllProductsRandomOrder,
+  increaseQuantity,
+  decreaseQuantity
 };

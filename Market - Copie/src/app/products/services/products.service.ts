@@ -20,8 +20,20 @@ export class ProductsService {
     return this.api.sendAuthorizedRequest('products/products', 'GET')
   }
 
-  addProduct(product: Product): Observable<any> {
+  addProduct(product: any): Observable<any> {
     return this.api.sendAuthorizedRequest('products/products', 'POST', product)
+  }
+
+  updateProduct(product: any, productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`products/products/${productId}`, 'PUT', product)
+  }
+
+  increaseQuantity(productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`products/products/increase/${productId}`, 'PUT')
+  }
+
+  decreaseQuantity(productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`products/products/decrease/${productId}`, 'PUT')
   }
 
   /*getAllCategories() {

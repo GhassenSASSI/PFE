@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Component, Inject, OnInit  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductsService } from '../../services/products.service';
-import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -19,7 +16,7 @@ export class AddProductModalComponent implements OnInit {
   rate: number
   price: number
 
-  constructor (private service: ProductsService, private dialogRef: MatDialogRef<AddProductModalComponent>, private sharedService: SharedService) {
+  constructor (private service: ProductsService, private dialogRef: MatDialogRef<AddProductModalComponent>) {
     this.photo = ''
     this.name = ''
     this.quantity = -1
