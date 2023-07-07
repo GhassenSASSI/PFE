@@ -1,6 +1,7 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output  } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductsService } from '../../services/products.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -16,7 +17,7 @@ export class AddProductModalComponent implements OnInit {
   rate: number
   price: number
 
-  constructor (private service: ProductsService, private dialogRef: MatDialogRef<AddProductModalComponent>) {
+  constructor (private service: ProductsService, private dialogRef: MatDialogRef<AddProductModalComponent>, private sharedService: SharedService) {
     this.photo = ''
     this.name = ''
     this.quantity = -1
@@ -42,6 +43,7 @@ export class AddProductModalComponent implements OnInit {
     this.service.addProduct(product).subscribe((res: any) => {
       console.log('product added successfully', res)
       this.closeDialog()
+      this.sharedService.setProductAdded(true)
     }, (err: any) => {
       console.log(product)
       console.log(err.error)

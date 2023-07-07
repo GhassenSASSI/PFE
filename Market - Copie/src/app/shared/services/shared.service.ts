@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/auth/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +6,7 @@ import { User } from 'src/app/auth/models/user';
 export class SharedService {
   loggedin:boolean = false;
   private userName: string = "";
+  productAdded: boolean = false;
 
   constructor() { }
 
@@ -24,5 +24,13 @@ export class SharedService {
 
   getUserName(): string {
     return this.userName;
+  }
+
+  setProductAdded(value: boolean) {
+    this.productAdded = value;
+  }
+
+  getProductAdded(): boolean {
+    return this.productAdded;
   }
 }

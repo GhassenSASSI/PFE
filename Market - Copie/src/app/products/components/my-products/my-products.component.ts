@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
-import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 import { UpdateProductModalComponent } from '../update-product-modal/update-product-modal.component';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-my-products',
   templateUrl: './my-products.component.html',
   styleUrls: ['./my-products.component.scss'],
 })
-export class MyProductsComponent implements OnInit {
+export class MyProductsComponent implements OnInit, DoCheck {
 
   dialogRef!: MatDialogRef<AddProductModalComponent, any>;
   dialogRefU!: MatDialogRef<UpdateProductModalComponent, any>;
   products:any[] = [];
   loading:boolean = false;
 
-  constructor(private dialog: MatDialog, private service:ProductsService) {}
+  constructor(private dialog: MatDialog, private service:ProductsService, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.getProducts();
     console.log(this.loading);
+  }
+
+  ngDoCheck(): void {
+    if (this.sharedService.getProductAdded()) {
+      this.getProducts()
+      this.sharedService.setProductAdded(false)
+    }
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
@@ -78,6 +85,24 @@ export class MyProductsComponent implements OnInit {
       if (item) {
         item.quantity -= 1;
       }
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
+
+  deleteOneProduct(productId: string) {
+    this.service.deleteOneProduct(productId).subscribe((res: any) => {
+      console.log('Product deleted successfully', res)
+      this.getProducts()
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
+
+  deleteProducts() {
+    this.service.deleteProducts().subscribe((res: any) => {
+      console.log('All products deleted successfully', res)
+      this.getProducts()
     }, (err: any) => {
       console.log(err.error)
     })

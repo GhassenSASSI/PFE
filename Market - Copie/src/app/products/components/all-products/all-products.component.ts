@@ -42,22 +42,6 @@ export class AllProductsComponent implements OnInit {
     })
   }*/
 
-  filterCategory(event:any) {
-    let value = event.target.value
-    this.loading = true
-    this.service.getProductsByCategory(value).subscribe((res:any) => {
-      if(value == 'all') {
-        this.getProducts()
-      }else {
-        this.products = res
-      }
-      this.loading = false
-    }, err => {
-      console.log(err.message)
-      this.loading = false
-    })
-  }
-
   addToCart(event:any) {
     let productNumber = event.quantity
     if("cart" in localStorage) {

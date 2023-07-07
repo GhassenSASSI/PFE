@@ -2,7 +2,7 @@
     <h1 class="text-danger">My Products</h1>
     <div class="head">
         <p class="lead">You have <label class="text-danger">{{products.length}}</label> products in your market</p>
-        <span class="text-danger card-header">Clear Your Market</span>
+        <span class="text-danger card-header" (click)="deleteProducts()">Clear Your Market</span>
     </div>
     <table class="table table-striped">
         <thead>
@@ -31,7 +31,7 @@
                 <td>14-01-1997</td>
                 <td><button class="btn btn-primary" (click)="openDialogU('1000ms', '1000ms', item._id, item.description, item.price)">Edit Description</button></td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger" (click)="deleteOneProduct(item._id)">Delete</button>
                 </td>
             </tr>
         </tbody>

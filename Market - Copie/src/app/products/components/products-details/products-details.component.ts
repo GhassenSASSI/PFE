@@ -18,17 +18,5 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProduct()
-  }
-
-  getProduct() {
-    this.loading = true
-    this.service.getProductById(this.id).subscribe(res => {
-      this.loading = false
-      this.data = res
-    }, err => {
-      this.loading = false
-      console.log(err.message)
-    })
   }
 }

@@ -36,15 +36,11 @@ export class ProductsService {
     return this.api.sendAuthorizedRequest(`products/products/decrease/${productId}`, 'PUT')
   }
 
-  /*getAllCategories() {
-    return this.http.get(environment.baseApi + 'products/categories')
-  }*/
-
-  getProductsByCategory(value:string) {
-    return this.http.get(environment.baseApi + 'products/category/' + value)
+  deleteOneProduct(productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`products/products/${productId}`, 'DELETE')
   }
 
-  getProductById(id:any) {
-    return this.http.get(environment.baseApi + 'products/' + id)
+  deleteProducts(): Observable<any> {
+    return this.api.sendAuthorizedRequest('products/products', 'DELETE')
   }
 }
