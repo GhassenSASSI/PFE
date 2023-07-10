@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
 import { environment } from 'src/environments/environments';
-import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +41,9 @@ export class ProductsService {
 
   deleteProducts(): Observable<any> {
     return this.api.sendAuthorizedRequest('products/products', 'DELETE')
+  }
+
+  addProductToCart(productId: string, product: any): Observable<any> {
+    return this.api.sendAuthorizedRequest(`cart/products/${productId}`, 'POST', product)
   }
 }

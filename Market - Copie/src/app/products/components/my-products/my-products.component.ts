@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
 import { ProductsService } from '../../services/products.service';

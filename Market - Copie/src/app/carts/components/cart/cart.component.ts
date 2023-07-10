@@ -10,11 +10,43 @@ export class CartComponent implements OnInit{
   cartProducts:any[] = []
   total:any = 0
   success:boolean = false
+  loading: boolean = false
 
   constructor(private service:CartsService) {}
 
   ngOnInit(): void {
-    this.getCartProducts()
+    //this.getCartProducts()
+    this.getProducts()
+  }
+
+  getProducts() {
+    this.loading = true
+    this.service.getProducts().subscribe((res:any) => {
+      this.cartProducts = res
+      this.loading = false
+      console.log(this.cartProducts)
+    }, (err: any) => {
+      this.loading = false
+      console.log(err.error)
+    })
+  }
+
+  deleteProduct(productId: string) {
+    this.service.deleteProduct(productId).subscribe((res:any) => {
+      console.log(res)
+      this.getProducts()
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
+
+  clearCart() {
+    this.service.deleteProducts().subscribe((res:any) => {
+      console.log(res)
+      this.getProducts()
+    }, (err: any) => {
+      console.log(err.error)
+    })
   }
 
   getCartProducts() {
@@ -37,18 +69,6 @@ export class CartComponent implements OnInit{
   }
 
   detectChange() {
-    this.getCartTotal()
-    localStorage.setItem("cart", JSON.stringify(this.cartProducts))
-  }
-
-  deleteProduct(index:number) {
-    this.cartProducts.splice(index, 1)
-    this.getCartTotal()
-    localStorage.setItem("cart", JSON.stringify(this.cartProducts))
-  }
-
-  clearCart() {
-    this.cartProducts = []
     this.getCartTotal()
     localStorage.setItem("cart", JSON.stringify(this.cartProducts))
   }

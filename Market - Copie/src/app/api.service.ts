@@ -25,7 +25,6 @@ export class ApiService {
 
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      console.log(token);
       return this.http.request<T>(method, `${this.apiUrl}${endpoint}`, { body, headers });
     } else {
       this.router.navigate(['/login']);

@@ -8,7 +8,7 @@ import { Product } from '../../models/product';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
-  products:Product[] = []
+  products:any[] = []
   categories:string[] = []
   loading:boolean = false
   cartProducts:any[] = []
@@ -42,26 +42,14 @@ export class AllProductsComponent implements OnInit {
     })
   }*/
 
-  addToCart(event:any) {
-    let productNumber = event.quantity
-    if("cart" in localStorage) {
-      this.cartProducts = JSON.parse(localStorage.getItem("cart")!)
-      let exist = this.cartProducts.find(item => item.item.id == event.item.id)
-      if(exist) {
-        alert("Product is already in your cart")
-      }else if(productNumber <= 0) {
-        alert("Product quantity is invalid")
-      }else {
-        this.cartProducts.push(event)
-        localStorage.setItem("cart", JSON.stringify(this.cartProducts))
-      }
-    }else {
-      if(productNumber <= 0) {
-        alert("Product quantity is invalid")
-      }else {
-        this.cartProducts.push(event)
-        localStorage.setItem("cart", JSON.stringify(this.cartProducts))
-      }
+  addToCart(event:any, productId: string) {
+    const product = {
+      quantity: event.quantity
     }
+    this.service.addProductToCart(productId, product).subscribe((res: any) => {
+      alert(res.message)
+    }, (err: any) => {
+      console.log(err.error)
+    })
   }
 }
