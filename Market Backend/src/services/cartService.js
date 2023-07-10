@@ -121,6 +121,66 @@ async function updateProductQuantity(productId, quantity, userId) {
     }
 }
 
+// Service function to increase a product quantity
+async function increaseProductQuantity(productId, userId) {
+    try {
+        const cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            throw new Error('Your cart is empty');
+        } else {
+            const productIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+            const product = await Product.findById({_id: productId});
+            if (productIndex === -1 || !product) {
+                throw new Error('Product not found');
+            } else {
+                cart.items[productIndex].quantity += 1;
+                if (cart.items[productIndex].quantity > product.quantity) {
+                    throw new Error('The requested quantity exceeds the available quantity of the product.');
+                }
+                cart.items[productIndex].totle = cart.items[productIndex].price * cart.items[productIndex].quantity;
+                const cartToUpdate = await Cart.findOneAndUpdate(
+                    { userId: userId },
+                    { $set: { items: cart.items } },
+                    { new: true }
+                );
+                return cartToUpdate.items[productIndex];
+            }
+        }
+    } catch (error) {
+        throw new Error(error.message + ' Failed to update product');
+    }
+}
+
+// Service function to decrease a product quantity
+async function decreaseProductQuantity(productId, userId) {
+    try {
+        const cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            throw new Error('Your cart is empty');
+        } else {
+            const productIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+            const product = await Product.findById({_id: productId});
+            if (productIndex === -1 || !product) {
+                throw new Error('Product not found');
+            } else {
+                cart.items[productIndex].quantity -= 1;
+                if (cart.items[productIndex].quantity < 1) {
+                    throw new Error('The quantity can not be less than one. If you want to remove this product you can press the Delete button.');
+                }
+                cart.items[productIndex].totle = cart.items[productIndex].price * cart.items[productIndex].quantity;
+                const cartToUpdate = await Cart.findOneAndUpdate(
+                    { userId: userId },
+                    { $set: { items: cart.items } },
+                    { new: true }
+                );
+                return cartToUpdate.items[productIndex];
+            }
+        }
+    } catch (error) {
+        throw new Error(error.message + ' Failed to update product');
+    }
+}
+
 // Service function to delete a product
 async function deleteProduct(productId, userId) {
     try {
@@ -171,5 +231,7 @@ module.exports = {
     getProducts,
     updateProductQuantity,
     deleteProduct,
-    deleteAllProducts
+    deleteAllProducts,
+    increaseProductQuantity,
+    decreaseProductQuantity
 }

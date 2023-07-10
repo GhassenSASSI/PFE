@@ -13,6 +13,12 @@ router.get('/products', authenticateToken, cartController.getProducts);
 // Route for updating a product quantity
 router.put('/products/:productId', authenticateToken, cartController.updateProductQuantity);
 
+// Route for increasing a product quantity
+router.put('/products/increase/:productId', authenticateToken, cartController.increaseProductQuantity);
+
+// Route for decreasing a product quantity
+router.put('/products/decrease/:productId', authenticateToken, cartController.decreaseProductQuantity);
+
 // Route for deleting a product
 router.delete('/products/:productId', authenticateToken, cartController.deleteProduct);
 

@@ -40,6 +40,32 @@ async function updateProductQuantity(req, res) {
   }
 }
 
+// Controller function to increase a product quantity
+async function increaseProductQuantity(req, res) {
+  const { productId } = req.params;
+  const userId = req.user.userId;
+
+  try {
+    const product = await cartService.increaseProductQuantity(productId, userId);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Controller function to decrease a product quantity
+async function decreaseProductQuantity(req, res) {
+  const { productId } = req.params;
+  const userId = req.user.userId;
+
+  try {
+    const product = await cartService.decreaseProductQuantity(productId, userId);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 // Controller function to delete a product
 async function deleteProduct(req, res) {
   const { productId } = req.params;
@@ -70,5 +96,7 @@ module.exports = {
     getProducts,
     updateProductQuantity,
     deleteProduct,
-    deleteAllProducts
+    deleteAllProducts,
+    increaseProductQuantity,
+    decreaseProductQuantity
 }

@@ -23,6 +23,14 @@ export class CartsService {
     return this.api.sendAuthorizedRequest('cart/products', 'DELETE')
   }
 
+  increaseProductQuantity(productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`cart/products/increase/${productId}`, 'PUT')
+  }
+
+  decreaseProductQuantity(productId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`cart/products/decrease/${productId}`, 'PUT')
+  }
+
   createNewCart(model:any) {
     return this.http.post(environment.baseApi + 'carts', model)
   }

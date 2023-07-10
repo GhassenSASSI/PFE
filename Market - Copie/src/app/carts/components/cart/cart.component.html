@@ -22,9 +22,9 @@
                 <td>{{item.price}} LE</td>
                 <td>
                     <div class="quantity">
-                        <button class="btn btn-dark" (click) = "increaseAmount(index)">+</button>
+                        <button class="btn btn-dark" (click) = "decreaseProductQuantity(item.productId)">-</button>
                         <input class="form-control" type="number" (change) = "detectChange()" [(ngModel)] = "item.quantity" min="1">
-                        <button class="btn btn-dark" (click) = "decreaseAmount(index)">-</button>
+                        <button class="btn btn-dark" (click) = "increaseProductQuantity(item.productId)">+</button>
                     </div>
                 </td>
                 <td>{{item.price * item.quantity}} LE</td>

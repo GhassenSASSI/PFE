@@ -46,6 +46,10 @@ export class AllProductsComponent implements OnInit {
     const product = {
       quantity: event.quantity
     }
+    if (event.quantity < 1) {
+      alert("you must enter a value")
+      return
+    }
     this.service.addProductToCart(productId, product).subscribe((res: any) => {
       alert(res.message)
     }, (err: any) => {

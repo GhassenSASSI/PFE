@@ -23,9 +23,9 @@
                 <td>{{item.price}} LE</td>
                 <td>
                     <div class="quantity">
-                        <button class="btn btn-dark" (click)="increaseQuantity(item._id)">+</button>
-                        <input class="form-control" type="number" min="1" value="{{item.quantity}}">
                         <button class="btn btn-dark" (click)="decreaseQuantity(item._id)">-</button>
+                        <input class="form-control" type="number" min="1" value="{{item.quantity}}">
+                        <button class="btn btn-dark" (click)="increaseQuantity(item._id)">+</button>
                     </div>
                 </td>
                 <td>14-01-1997</td>

@@ -49,6 +49,30 @@ export class CartComponent implements OnInit{
     })
   }
 
+  increaseProductQuantity(productId: string) {
+    this.service.increaseProductQuantity(productId).subscribe((res:any) => {
+      console.log(res)
+      const item = this.cartProducts.find((item) => item.productId === productId);
+      if (item) {
+        item.quantity += 1;
+      }
+    }, (err: any) => {
+      alert(err.error.error)
+    })
+  }
+
+  decreaseProductQuantity(productId: string) {
+    this.service.decreaseProductQuantity(productId).subscribe((res:any) => {
+      console.log(res)
+      const item = this.cartProducts.find((item) => item.productId === productId);
+      if (item) {
+        item.quantity -= 1;
+      }
+    }, (err: any) => {
+      alert(err.error.error)
+    })
+  }
+
   getCartProducts() {
     if("cart" in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem("cart")!)
