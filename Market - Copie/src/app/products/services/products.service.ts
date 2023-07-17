@@ -46,4 +46,8 @@ export class ProductsService {
   addProductToCart(productId: string, product: any): Observable<any> {
     return this.api.sendAuthorizedRequest(`cart/products/${productId}`, 'POST', product)
   }
+
+  getProductDetails(productId: string): Observable<any> {
+    return this.http.get(environment.baseApi + `products/product/${productId}`)
+  }
 }

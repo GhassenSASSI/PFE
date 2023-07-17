@@ -14,6 +14,7 @@ export class HeaderComponent implements DoCheck{
   isLoggedIn: boolean = false;
   isShining: boolean = false;
   isDropdownOpen: boolean = false;
+  isAdmin: boolean = false;
   userName: string = "";
 
   constructor(private sharedService: SharedService, private authService: AuthService, private router: Router, private api: ApiService) {}
@@ -21,6 +22,7 @@ export class HeaderComponent implements DoCheck{
   ngDoCheck(): void {
     this.isLoggedIn = this.sharedService.getBoolValue();
     this.userName = this.sharedService.getUserName();
+    //this.isAdmin = this.sharedService.getIsAdmin();
   }
 
   startShining() {

@@ -3,7 +3,7 @@ const authService = require('../services/authService');
 
 // Controller function for user registration
 async function register(req, res) {
-  const { userName, email, password, confirmPassword } = req.body;
+  const { userName, email, password, confirmPassword, isAdmin } = req.body;
 
   // Validate email address
   if (!validator.validate(email)) {
@@ -11,7 +11,7 @@ async function register(req, res) {
   }
 
   try {
-    await authService.register(userName, email, password, confirmPassword);
+    await authService.register(userName, email, password, confirmPassword, isAdmin);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });

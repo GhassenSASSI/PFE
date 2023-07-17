@@ -28,4 +28,7 @@ router.put('/products/increase/:productId', authenticateToken, productController
 // Route for decreasing quantity
 router.put('/products/decrease/:productId', authenticateToken, productController.decreaseQuantity);
 
+// Route for getting a product
+router.get('/product/:productId', productController.getProductById);
+
 module.exports = router;

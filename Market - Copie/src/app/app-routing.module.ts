@@ -6,6 +6,7 @@ import { CartComponent } from './carts/components/cart/cart.component';
 import { MyProductsComponent } from './products/components/my-products/my-products.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
+import { AllUsersComponent } from './users/components/all-users/all-users.component';
 
 const routes: Routes = [
   {path:"products", component:AllProductsComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:"myProducts", component:MyProductsComponent},
   {path:"details/:id", component:ProductsDetailsComponent},
   {path:"cart", component:CartComponent},
+  {path:"users", component:AllUsersComponent},
   {path:"**", redirectTo:"products", pathMatch:"full"}
 ];
 

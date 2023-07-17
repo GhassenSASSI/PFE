@@ -7,6 +7,7 @@ export class SharedService {
   loggedin:boolean = false;
   private userName: string = "";
   productAdded: boolean = false;
+  isAdmin: boolean = false;
 
   constructor() { }
 
@@ -32,5 +33,13 @@ export class SharedService {
 
   getProductAdded(): boolean {
     return this.productAdded;
+  }
+
+  setIsAdmin(value: boolean) {
+    this.isAdmin = value;
+  }
+
+  getIsAdmin(): boolean {
+    return this.isAdmin;
   }
 }

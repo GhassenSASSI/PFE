@@ -114,6 +114,16 @@ async function decreaseQuantity(productId, userId) {
   }
 }
 
+// Service function to get one product
+async function getProductById(productId) {
+  try {
+    const product = await Product.findById({ _id: productId });
+    return product;
+  } catch (error) {
+    throw new Error('Failed to retrieve the product');
+  }
+}
+
 module.exports = {
   addProduct,
   getProducts,
@@ -122,5 +132,6 @@ module.exports = {
   deleteAllProducts,
   getAllProductsRandomOrder,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  getProductById
 };

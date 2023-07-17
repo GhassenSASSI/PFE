@@ -13,13 +13,13 @@ function generateToken(userId) {
 }
 
 // Function for user registration
-async function register(userName, email, password, confirmPassword) {
+async function register(userName, email, password, confirmPassword, isAdmin) {
     try {
       if (password !== confirmPassword) {
         throw new Error('Password and confirmation password do not match');
       }
   
-      const user = new User({ userName, email, password });
+      const user = new User({ userName, email, password, isAdmin });
       await user.save();
     } catch (error) {
       throw new Error('Failed to register user');

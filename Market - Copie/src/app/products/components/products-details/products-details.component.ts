@@ -14,9 +14,21 @@ export class ProductsDetailsComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private service:ProductsService) {
     this.id = this.route.snapshot.paramMap.get("id")
-    console.log(this.id)
   }
 
   ngOnInit(): void {
+    this.getProduct()
+  }
+
+  getProduct() {
+    this.loading = true
+    this.service.getProductDetails(this.id).subscribe((res:any) => {
+      this.data = res
+      console.log("Product retreived successfully", res)
+      this.loading = false
+    }, err => {
+      console.log(err.error)
+      this.loading = false
+    })
   }
 }

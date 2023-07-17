@@ -1,16 +1,16 @@
 <div class = "box">
     <div class = "row" *ngIf = "!loading">
         <div class = "col-md-5 col-sm-12">
-            <img src="{{data.image}}" alt="sas">
+            <img src="{{data.photo}}" alt="sas">
         </div>
         <div class="col-md-7 col-sm-12">
             <div class="info">
                 <ul class="list-unstyled">
-                    <li><strong>Title :</strong>{{data.title}}</li>
-                    <li><strong>Category :</strong>{{data.category}}</li>
+                    <li><strong>Name :</strong>{{data.name}}</li>
+                    <li><strong>Category :</strong>Category</li>
                     <li><strong>Description :</strong>{{data.description}}</li>
-                    <li><strong>Rate :</strong>{{data.rating.rate}}</li>
-                    <li><strong>Count :</strong>{{data.rating.count}}</li>
+                    <li><strong>Rate :</strong>{{data.rate}}</li>
+                    <li><strong>Quantity :</strong>{{data.quantity}}</li>
                     <li><strong>Price :</strong>{{data.price}} LE</li>
                 </ul>
             </div>

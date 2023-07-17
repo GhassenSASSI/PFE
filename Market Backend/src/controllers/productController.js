@@ -102,6 +102,18 @@ async function decreaseQuantity(req, res) {
   }
 }
 
+// Controller function to get one product
+async function getProductById(req, res) {
+  const { productId } = req.params;
+
+  try {
+    const product = await productService.getProductById(productId);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   addProduct,
   getProducts,
@@ -110,5 +122,6 @@ module.exports = {
   deleteAllProducts,
   getAllProducts,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  getProductById
 };

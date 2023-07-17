@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit{
   email:string;
   password:string;
   confirmPassword:string;
+  isAdmin:boolean;
   errMessage:string = "";
   error:boolean = false
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit{
     this.email = '';
     this.password = '';
     this.confirmPassword = '';
+    this.isAdmin = false;
   }
 
   ngOnInit(): void {
@@ -51,7 +53,8 @@ export class RegisterComponent implements OnInit{
       userName: this.userName,
       email: this.email,
       password: this.password,
-      confirmPassword: this.confirmPassword
+      confirmPassword: this.confirmPassword,
+      isAdmin: this.isAdmin
     };
   
     this.service.registerUser(user).subscribe((res: any) => {
