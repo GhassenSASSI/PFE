@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit{
         console.log('Successfully logged in', res);
         this.sharedService.setBoolValue(true);
         this.sharedService.setUserName(res.user.user.userName);
+        this.sharedService.setIsAdmin(res.user.user.isAdmin);
         this.api.setToken(res.user.token);
       }, (err: any) => {
         // Handle login errors

@@ -22,7 +22,7 @@ export class HeaderComponent implements DoCheck{
   ngDoCheck(): void {
     this.isLoggedIn = this.sharedService.getBoolValue();
     this.userName = this.sharedService.getUserName();
-    //this.isAdmin = this.sharedService.getIsAdmin();
+    this.isAdmin = this.sharedService.getIsAdmin();
   }
 
   startShining() {
