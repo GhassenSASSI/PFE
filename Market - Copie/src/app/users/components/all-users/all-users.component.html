@@ -16,13 +16,13 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor = "let item of users">
             <tr>
-                <td><img src="" alt=""></td>
-                <td>Ghassen Sassi</td>
-                <td>ghassen@gmail.com</td>
-                <td>12</td>
-                <td>14-01-1997</td>
+                <td><div class="user-circle">{{item.userName.charAt(0)}}</div></td>
+                <td>{{item.userName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.productCount}}</td>
+                <td>{{item.registrationDate}}</td>
                 <td><button class="btn btn-primary">Profile</button></td>
                 <td>
                     <button class="btn btn-danger">Delete</button>

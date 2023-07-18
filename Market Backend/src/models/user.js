@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
+
 
 const userSchema = new mongoose.Schema({
     userName: {
@@ -23,6 +25,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    registrationDate: {
+      type: String,
+      default: function () {
+        const formattedDate = formatDate(new Date());
+        return formattedDate;
+      },
+      required: true,
     }
 });
 
@@ -50,6 +60,13 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
     throw error;
   }
 };
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 const User = mongoose.model('User', userSchema);
 
