@@ -12,4 +12,12 @@ export class UsersService {
   getUsers(): Observable<any> {
     return this.api.sendAuthorizedRequest('admin/users', 'GET')
   }
+
+  deleteOneUser(clientId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`admin/users/${clientId}`, 'DELETE')
+  }
+
+  deleteAllUsers(): Observable<any> {
+    return this.api.sendAuthorizedRequest('admin/users', 'DELETE')
+  }
 }

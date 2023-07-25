@@ -1,0 +1,41 @@
+<div class="box">
+    <h1 class="text-danger">Orders</h1>
+    <div class="head">
+        <p class="lead">There are <label class="text-danger">{{orders.length}}</label> order(s)</p>
+        <span class="text-danger card-header">Clear Orders</span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>User name</th>
+                <th></th>
+                <th style="width: 25%;">Ordered product(s)</th>
+                <th></th>
+                <th>Order date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let order of orders">
+                <td><img src="" alt=""></td>
+                <td>{{order.userName}}</td>
+                <td>
+                    <button class="btn btn-primary">View User</button>
+                </td>
+                <td>
+                    <div class="products">
+                        <select class="form-control">
+                            <option *ngFor = "let item of order.items">{{item.name}}</option>
+                        </select>
+                    </div>
+                </td>
+                <td><button class="btn btn-danger">View Product</button></td>
+                <td>{{order.orderDate}}</td>
+                <td>
+                    <button class="btn btn-danger">Reject Order</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

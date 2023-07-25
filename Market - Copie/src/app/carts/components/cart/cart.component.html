@@ -23,7 +23,7 @@
                 <td>
                     <div class="quantity">
                         <button class="btn btn-dark" (click) = "decreaseProductQuantity(item.productId)">-</button>
-                        <input class="form-control" type="number" (change) = "detectChange()" [(ngModel)] = "item.quantity" min="1">
+                        <input class="form-control" type="number" [(ngModel)] = "item.quantity" min="1">
                         <button class="btn btn-dark" (click) = "increaseProductQuantity(item.productId)">+</button>
                     </div>
                 </td>
@@ -40,7 +40,7 @@
                 <th></th>
                 <th></th>
                 <th>Total : {{total}} LE</th>
-                <th><button class="btn btn-success" (click) = "addCart()">Order Now</button></th>
+                <th><button class="btn btn-success" (click)="placeOrder()">Order Now</button></th>
             </tr>
         </tfoot>
     </table>

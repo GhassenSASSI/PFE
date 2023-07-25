@@ -85,7 +85,7 @@ async function addProduct(productId, userId, quantity) {
 async function getProducts(userId) {
     try {
       const cart = await Cart.findOne({ userId: userId });
-      return cart.items;
+      return cart;
     } catch (error) {
       throw new Error('Failed to get products');
     }

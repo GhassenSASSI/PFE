@@ -8,6 +8,10 @@ const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+
+const http = require('http');
+const { initializeSocket } = require('./socketManager');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +29,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/order', orderRoutes);
 
 // Connect to MongoDB
 mongoose.connect(
@@ -33,8 +38,15 @@ mongoose.connect(
 )
   .then(() => {
     console.log('Connected to MongoDB');
+
+    // Create the HTTP server and pass the app to it
+    const server = http.createServer(app);
+
+    // Initialize Socket.io by passing the server instance to the socketManager module
+    initializeSocket(server);
+
     // Start the server
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   })

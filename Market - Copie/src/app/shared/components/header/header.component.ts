@@ -4,6 +4,7 @@ import { LoginComponent } from 'src/app/auth/components/login/login.component';
 import { SharedService } from '../../services/shared.service';
 import { Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { SocketService } from 'src/app/socket.service';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +17,15 @@ export class HeaderComponent implements DoCheck{
   isDropdownOpen: boolean = false;
   isAdmin: boolean = false;
   userName: string = "";
+  newOrder: boolean = false;
 
-  constructor(private sharedService: SharedService, private authService: AuthService, private router: Router, private api: ApiService) {}
+  constructor(private sharedService: SharedService, private authService: AuthService, private router: Router, private api: ApiService, private socketService: SocketService) {}
 
   ngDoCheck(): void {
     this.isLoggedIn = this.sharedService.getBoolValue();
     this.userName = this.sharedService.getUserName();
     this.isAdmin = this.sharedService.getIsAdmin();
+    this.newOrder = this.socketService.getNewOrder();
   }
 
   startShining() {

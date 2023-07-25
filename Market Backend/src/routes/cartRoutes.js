@@ -1,5 +1,6 @@
 const express = require('express');
 const cartController = require('../controllers/cartController');
+const orderController = require('../controllers/orderController');
 const { authenticateToken } = require('../utils/authUtils');
 
 const router = express.Router();
@@ -24,6 +25,9 @@ router.delete('/products/:productId', authenticateToken, cartController.deletePr
 
 // Route for deleting all products
 router.delete('/products', authenticateToken, cartController.deleteAllProducts);
+
+// Route for placing a new order
+router.post('/order/:cartId', authenticateToken, orderController.placeOrder);
 
 /*// Route for ordering
 router.post('/products', authenticateToken, cartController.orderProducts);*/

@@ -31,6 +31,14 @@ export class CartsService {
     return this.api.sendAuthorizedRequest(`cart/products/decrease/${productId}`, 'PUT')
   }
 
+  placeOrder(cartId: string): Observable<any> {
+    return this.api.sendAuthorizedRequest(`cart/order/${cartId}`, 'POST')
+  }
+
+  getOrders(): Observable<any> {
+    return this.api.sendAuthorizedRequest('order/allOrders', 'GET')
+  }
+
   createNewCart(model:any) {
     return this.http.post(environment.baseApi + 'carts', model)
   }

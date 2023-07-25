@@ -4,9 +4,10 @@
                 <h2 class="logo" routerLink="/">Market</h2> 
             <ul [ngStyle]="{ 'width': isAdmin ? '60%' : '50%' }">
                 <li *ngIf="isAdmin" routerLink="/users">Users</li>
+                <li *ngIf="isAdmin" [ngStyle]="newOrder ? { 'color': 'blue' } : { 'color': '' }" routerLink="/orders">Orders</li>
                 <li routerLink="/"> Products</li>
                 <li routerLink="/myProducts"> My Products</li>
-                <li routerLink="/cart"> Cart</li>
+                <li *ngIf="!isAdmin" routerLink="/cart"> Cart</li>
                 <ng-container *ngIf="!isLoggedIn">
                     <div ngbDropdown class="d-inline-block">
                         <li>

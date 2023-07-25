@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartsService } from '../../services/carts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,8 +12,9 @@ export class CartComponent implements OnInit{
   total:any = 0
   success:boolean = false
   loading: boolean = false
+  cartId: string = ""
 
-  constructor(private service:CartsService) {}
+  constructor(private service:CartsService, private router: Router) {}
 
   ngOnInit(): void {
     //this.getCartProducts()
@@ -22,7 +24,8 @@ export class CartComponent implements OnInit{
   getProducts() {
     this.loading = true
     this.service.getProducts().subscribe((res:any) => {
-      this.cartProducts = res
+      this.cartProducts = res.items
+      this.cartId = res._id
       this.loading = false
       console.log(this.cartProducts)
     }, (err: any) => {
@@ -34,7 +37,11 @@ export class CartComponent implements OnInit{
   deleteProduct(productId: string) {
     this.service.deleteProduct(productId).subscribe((res:any) => {
       console.log(res)
-      this.getProducts()
+      if(this.cartProducts.length > 1){
+        this.getProducts()
+      } else {
+        this.router.navigate(['/cart']);
+      }
     }, (err: any) => {
       console.log(err.error)
     })
@@ -43,7 +50,7 @@ export class CartComponent implements OnInit{
   clearCart() {
     this.service.deleteProducts().subscribe((res:any) => {
       console.log(res)
-      this.getProducts()
+      this.router.navigate(['/cart']);
     }, (err: any) => {
       console.log(err.error)
     })
@@ -73,7 +80,21 @@ export class CartComponent implements OnInit{
     })
   }
 
-  getCartProducts() {
+  placeOrder() {
+    this.service.placeOrder(this.cartId).subscribe((res:any) => {
+      if(this.cartProducts.length > 0){
+        console.log(res)
+        this.clearCart()
+        this.success = true
+      }else {
+        alert("You have 0 items in your cart!")
+      }
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
+
+  /*getCartProducts() {
     if("cart" in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem("cart")!)
     }
@@ -125,5 +146,5 @@ export class CartComponent implements OnInit{
       console.log(err.message)
     })
     console.log(Model)
-  }
+  }*/
 }

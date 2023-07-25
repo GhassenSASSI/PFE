@@ -1,8 +1,8 @@
 <div class="box">
     <h1 class="text-danger">Users</h1>
     <div class="head">
-        <p class="lead">there are <label class="text-danger">0</label> registered user(s)</p>
-        <span class="text-danger card-header">Delete all users</span>
+        <p class="lead">there are <label class="text-danger">{{users.length}}</label> registered user(s)</p>
+        <span class="text-danger card-header" (click)="deleteUsers()">Delete all users</span>
     </div>
     <table class="table table-striped">
         <thead>
@@ -25,7 +25,7 @@
                 <td>{{item.registrationDate}}</td>
                 <td><button class="btn btn-primary">Profile</button></td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger" (click)="deleteOneUser(item._id)">Delete</button>
                 </td>
             </tr>
         </tbody>

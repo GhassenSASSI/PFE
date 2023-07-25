@@ -28,7 +28,7 @@
                         <button class="btn btn-dark" (click)="increaseQuantity(item._id)">+</button>
                     </div>
                 </td>
-                <td>14-01-1997</td>
+                <td>{{item.exposureDate}}</td>
                 <td><button class="btn btn-primary" (click)="openDialogU('1000ms', '1000ms', item._id, item.description, item.price)">Edit Description</button></td>
                 <td>
                     <button class="btn btn-danger" (click)="deleteOneProduct(item._id)">Delete</button>

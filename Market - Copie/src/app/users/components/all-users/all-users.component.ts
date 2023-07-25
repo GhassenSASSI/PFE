@@ -24,4 +24,22 @@ export class AllUsersComponent implements OnInit {
       console.log(err.error)
     })
   }
+
+  deleteOneUser(clientId: string) {
+    this.service.deleteOneUser(clientId).subscribe((res: any) => {
+      console.log('User deleted successfully', res)
+      this.getUsers()
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
+
+  deleteUsers() {
+    this.service.deleteAllUsers().subscribe((res: any) => {
+      console.log('All users deleted successfully', res)
+      this.getUsers()
+    }, (err: any) => {
+      console.log(err.error)
+    })
+  }
 }
