@@ -1,6 +1,7 @@
+<!--<app-carousel></app-carousel>
 <div class="box mt-5">
     <div class="my-2 w-25">
-        <!--<app-select [title] = "'Categories'" [data] = "categories" (selectedValue) = "filterCategory($event)"></app-select>-->
+        <!-<app-select [title] = "'Categories'" [data] = "categories" (selectedValue) = "filterCategory($event)"></app-select>->
         <app-select [title] = "'Categories'"></app-select>
     </div>
     <div class="row" *ngIf = "!loading">
@@ -12,3 +13,30 @@
         <app-spinner></app-spinner>
     </div>
 </div>
+<app-side-bar></app-side-bar>-->
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <app-carousel></app-carousel>
+      </div>
+    </div>
+    <div class="row">
+      <div [ngClass]="sidebarExpanded ? 'col-md-2' : 'col-md-1'">
+        <app-side-bar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-side-bar>
+      </div>
+      <div [ngClass]="sidebarExpanded ? 'col-md-10' : 'col-md-11'">
+        <div class="box mt-5">
+          <div class="row" *ngIf="!loading">
+            <div class="col-md-4 col-sm-12" *ngFor="let item of products">
+              <app-product [data]="item" (item)="addToCart($event, item._id)"></app-product>
+            </div>
+          </div>
+          <div class="text-center w-100" *ngIf="loading">
+            <app-spinner></app-spinner>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

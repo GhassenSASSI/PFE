@@ -6,9 +6,13 @@ import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SelectComponent } from './components/select/select.component';
 import { FormsModule } from '@angular/forms';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserButtonComponent } from './components/user-button/user-button.component';
 import { SharedService } from './services/shared.service';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { CarouselModule } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 
 
@@ -17,21 +21,28 @@ import { SharedService } from './services/shared.service';
     HeaderComponent,
     SpinnerComponent,
     SelectComponent,
-    UserButtonComponent
+    UserButtonComponent,
+    CarouselComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     FormsModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    CarouselModule,
+    IconModule,
+    NgbCarouselModule
   ],
   exports: [
     HeaderComponent,
     SpinnerComponent,
     SelectComponent,
     UserButtonComponent,
-    FormsModule
+    FormsModule,
+    CarouselComponent,
+    SideBarComponent
   ],
   providers: [
     SharedService

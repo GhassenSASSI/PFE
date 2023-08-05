@@ -1,0 +1,36 @@
+<div class="box">
+    <h1 class="text-danger">Confirm Products</h1>
+    <div class="head">
+        <p class="lead">There are <label class="text-danger">1</label> not confirmed product(s)</p>
+        <span class="text-danger card-header">Reject All Products</span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>User name</th>
+                <th></th>
+                <th>Product</th>
+                <th></th>
+                <th>Exposure date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let product of products">
+                <td><div class="user-circle">{{product.userName.charAt(0)}}</div></td>
+                <td>{{product.userName}}</td>
+                <td>
+                    <button class="btn btn-primary">View User</button>
+                </td>
+                <td>{{product.name}}</td>
+                <td><button class="btn btn-primary">View Product</button></td>
+                <td>{{product.exposureDate}}</td>
+                <td>
+                    <button class="btn btn-success">confirm Product</button>
+                    <button class="btn btn-danger">Reject Product</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

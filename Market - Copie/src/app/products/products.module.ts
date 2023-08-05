@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { MyProductsComponent } from './components/my-products/my-products.component';
 import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
 import { UpdateProductModalComponent } from './components/update-product-modal/update-product-modal.component';
+import { NotConfirmedProductComponent } from './components/not-confirmed-product/not-confirmed-product.component';
 
 
 
@@ -19,7 +20,8 @@ import { UpdateProductModalComponent } from './components/update-product-modal/u
     ProductComponent,
     MyProductsComponent,
     AddProductModalComponent,
-    UpdateProductModalComponent
+    UpdateProductModalComponent,
+    NotConfirmedProductComponent
   ],
   imports: [
     CommonModule,

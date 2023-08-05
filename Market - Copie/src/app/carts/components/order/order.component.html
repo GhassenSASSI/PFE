@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr *ngFor = "let order of orders">
-                <td><img src="" alt=""></td>
+                <td><div class="user-circle">{{order.userName.charAt(0)}}</div></td>
                 <td>{{order.userName}}</td>
                 <td>
                     <button class="btn btn-primary">View User</button>

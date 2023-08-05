@@ -38,6 +38,10 @@ const productSchema = new mongoose.Schema({
     set: (value) => (parseFloat(value.toFixed(1))),
     required: true
   },
+  category: {
+    type: String,
+    default: ''
+  },
   exposureDate: {
     type: String,
     default: function () {
@@ -45,6 +49,10 @@ const productSchema = new mongoose.Schema({
       return formattedDate;
     },
     required: true,
+  },
+  status: {
+    type: Boolean,
+    default: false
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

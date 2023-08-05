@@ -2,9 +2,10 @@
     <div class="container">
         <div class="content">
                 <h2 class="logo" routerLink="/">Market</h2> 
-            <ul [ngStyle]="{ 'width': isAdmin ? '60%' : '50%' }">
+            <ul [ngStyle]="{ 'width': isAdmin ? '70%' : '50%' }">
                 <li *ngIf="isAdmin" routerLink="/users">Users</li>
                 <li *ngIf="isAdmin" [ngStyle]="newOrder ? { 'color': 'blue' } : { 'color': '' }" routerLink="/orders">Orders</li>
+                <li *ngIf="isAdmin" routerLink="/notConfirmedProducts">Confirm products</li>
                 <li routerLink="/"> Products</li>
                 <li routerLink="/myProducts"> My Products</li>
                 <li *ngIf="!isAdmin" routerLink="/cart"> Cart</li>

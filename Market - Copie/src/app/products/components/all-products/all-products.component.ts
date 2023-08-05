@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-all-products',
@@ -12,8 +13,10 @@ export class AllProductsComponent implements OnInit {
   categories:string[] = []
   loading:boolean = false
   cartProducts:any[] = []
+  sidebarExpanded = true;
+  isFixed: boolean = false;
 
-  constructor(private service:ProductsService) {}
+  constructor(private service:ProductsService, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.getProducts()
@@ -24,6 +27,8 @@ export class AllProductsComponent implements OnInit {
     this.loading = true
     this.service.getAllProducts().subscribe((res:any) => {
       this.products = res
+      this.sharedService.setProducts(this.products)
+      this.sharedService.setDataReady(true)
       this.loading = false
     }, err => {
       console.log(err.error.message)
@@ -55,5 +60,27 @@ export class AllProductsComponent implements OnInit {
     }, (err: any) => {
       console.log(err.error)
     })
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    // Get the reference to the main content element
+    const mainContent = document.querySelector('.box') as HTMLElement;
+
+    // Get the current scroll position
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Get the height of the main content area where you want to fix the sidebar
+    const mainContentHeight = mainContent.offsetHeight;
+
+    // Get the height of the sidebar element
+    const sidebar = document.querySelector('.col-md-2') as HTMLElement;
+    const sidebarHeight = sidebar.offsetHeight;
+
+    // Calculate the point where the sidebar should be fixed
+    const fixedPoint = mainContentHeight - sidebarHeight - 100; // Adjust the value as needed
+
+    // Update the sidebarExpanded flag based on the scroll position
+    this.isFixed = scrollPosition > fixedPoint;
   }
 }

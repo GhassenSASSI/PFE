@@ -1,0 +1,23 @@
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item" [ngStyle]="carouselInnerStyles">
+            <img *ngFor="let item of carouselItems" [src]="item" [alt]="" class="img-fluid">
+        </div>
+    </div>
+    <div class="carousel-pagination">
+      <span 
+        class="pagination-dot"
+        *ngFor="let item of carouselItems; let i = index"
+        [ngClass]="{'active': currentIndex === i}"
+        (click)="goToSlide(i)"
+      ></span>
+    </div>
+</div>
+
+<!--<ngb-carousel>
+    <ng-template ngbSlide *ngFor="let item of carouselItems">
+        <div class="carousel-wrapper">
+            <img src="{{item}}" alt="">
+        </div>
+    </ng-template>
+</ngb-carousel>-->

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +11,14 @@ export class SharedService {
   private userName: string = "";
   productAdded: boolean = false;
   isAdmin: boolean = false;
+  products: any[] = [];
+  dataReady: boolean = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getCategories(): Observable<any> {
+    return this.http.get(environment.baseApi + 'categories/categories')
+  }
 
   setBoolValue(value:boolean) {
     this.loggedin = value
@@ -41,5 +50,21 @@ export class SharedService {
 
   getIsAdmin(): boolean {
     return this.isAdmin;
+  }
+
+  setProducts(value: any) {
+    this.products = value;
+  }
+
+  getProducts(): any {
+    return this.products;
+  }
+
+  setDataReady(value: boolean) {
+    this.dataReady = value;
+  }
+
+  getDataReady(): boolean {
+    return this.dataReady;
   }
 }

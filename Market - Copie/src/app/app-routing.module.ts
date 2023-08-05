@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AllUsersComponent } from './users/components/all-users/all-users.component';
 import { OrderComponent } from './carts/components/order/order.component';
+import { NotConfirmedProductComponent } from './products/components/not-confirmed-product/not-confirmed-product.component';
 
 const routes: Routes = [
   {path:"products", component:AllProductsComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:"cart", component:CartComponent},
   {path:"users", component:AllUsersComponent},
   {path:"orders", component:OrderComponent},
+  {path:"notConfirmedProducts", component:NotConfirmedProductComponent},
   {path:"**", redirectTo:"products", pathMatch:"full"}
 ];
 

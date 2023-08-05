@@ -18,7 +18,7 @@
         </thead>
         <tbody *ngFor = "let item of products">
             <tr>
-                <td><img src="{{item.photo}}" alt=""></td>
+                <td><img src="{{item.photo}}" [ngStyle]="{ 'opacity': item.status ? '100%' : '50%' }" alt="" ></td>
                 <td>{{item.name}}</td>
                 <td>{{item.price}} LE</td>
                 <td>

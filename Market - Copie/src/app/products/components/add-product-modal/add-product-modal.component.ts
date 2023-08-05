@@ -16,6 +16,10 @@ export class AddProductModalComponent implements OnInit {
   description: string
   rate: number
   price: number
+  categories: any[] = []
+  selectedCategory: any = null
+  showSelect: boolean = false
+  categoryId: string = ''
 
   constructor (private service: ProductsService, private dialogRef: MatDialogRef<AddProductModalComponent>, private sharedService: SharedService) {
     this.photo = ''
@@ -27,7 +31,7 @@ export class AddProductModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    //this.getCategories()
   }
 
   addProduct() {
@@ -66,5 +70,22 @@ export class AddProductModalComponent implements OnInit {
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  getCategories() {
+    this.sharedService.getCategories().subscribe((res:any) => {
+      this.categories = res
+    }, err => {
+      console.log(err.error)
+    })
+  }
+
+  selectCategory() {
+    this.selectedCategory = this.categories.find((category) => category._id === this.categoryId)
+    if(this.selectedCategory && this.selectedCategory.children && this.selectedCategory.children.length > 0) {
+      this.showSelect = true
+    }
+    //this.showSelect = false
+    console.log(this.categoryId)
   }
 }

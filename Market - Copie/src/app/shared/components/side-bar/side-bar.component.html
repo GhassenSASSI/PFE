@@ -1,0 +1,73 @@
+<!--<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+      <h1 class="title" [style.display]="isExpanded ? 'block' : 'none'">
+        Categories
+      </h1>
+      <div class="toggle" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="link">
+        <div class="content" [routerLink]="['/home']" [routerLinkActive]="'active'">
+          <div class="title">Home</div>
+        </div>
+      </div>
+      <div class="link with-children">
+        <div class="content" [routerLink]="['/configuration']" [routerLinkActive]="'active'">
+          <div class="title">Configuration</div>
+        </div>
+        <div class="children">
+          <div class="link">
+            <div class="content" [routerLink]="['/configuration']" [queryParams]="{ 'child': '1' }"
+              [routerLinkActive]="'active'">
+              <div class="title">child 1</div>
+            </div>
+          </div>
+          <div class="link">
+            <div class="content" [routerLink]="['/configuration']" [queryParams]="{ 'child': '2' }"
+              [routerLinkActive]="'active'">
+              <div class="title">child 2</div>
+            </div>
+          </div>
+          <div class="link">
+            <div class="content" [routerLink]="['/configuration']" [queryParams]="{ 'child': '3' }"
+              [routerLinkActive]="'active'">
+              <div class="title">child 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="link">
+        <div class="content" [routerLink]="['/bookings']" [routerLinkActive]="'active'">
+          <div class="title">Bookings</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>-->
+
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+      <h1 class="title" [style.display]="isExpanded ? 'block' : 'none'">Categories</h1>
+      <div class="toggle" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
+      </div>
+    </div>
+    <div class="content">
+      <ng-template #categoryTemplate let-categories>
+        <div class="link" *ngFor="let category of categories">
+          <div class="content">
+            <div class="title">{{ category.name }}</div>
+          </div>
+          <ng-container *ngIf="category.children && category.children.length > 0">
+            <div class="children">
+              <ng-container *ngTemplateOutlet="categoryTemplate; context:{ $implicit: category.children }"></ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="categoryTemplate; context:{ $implicit: categories }"></ng-container>
+    </div>
+    <div class="footer"></div>
+</div>

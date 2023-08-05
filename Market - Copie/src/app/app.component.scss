@@ -1,0 +1,30 @@
+/*  .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+  }*/
+  
+  .left-image, .right-image {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  
+  .left-image {
+    left: 0;
+    background-image: url('../assets/uploads/Nouveau\ projet.jpg');
+  }
+  
+  .right-image {
+    right: 0;
+    background-image: url('../assets/uploads/Nouveau\ projet.jpg');
+  }
+  
+  /*.container > .home-page-container > router-outlet {
+    position: relative;
+    z-index: 1;
+  } */

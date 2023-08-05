@@ -114,6 +114,29 @@ async function getProductById(req, res) {
   }
 }
 
+// Controller function to get not confirmed products
+async function getNotConfirmedProducts(req, res) {
+  try {
+    const products = await productService.getNotConfirmedProducts();
+    res.json(products)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Controller function to confirm a product
+async function confirmProduct(req, res) {
+  const { productId } = req.params;
+  const { category } = req.body;
+
+  try {
+    const product = await productService.confirmProduct(productId, category);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   addProduct,
   getProducts,
@@ -123,5 +146,7 @@ module.exports = {
   getAllProducts,
   increaseQuantity,
   decreaseQuantity,
-  getProductById
+  getProductById,
+  getNotConfirmedProducts,
+  confirmProduct
 };

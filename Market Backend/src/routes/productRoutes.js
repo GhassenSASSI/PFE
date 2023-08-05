@@ -31,4 +31,10 @@ router.put('/products/decrease/:productId', authenticateToken, productController
 // Route for getting a product
 router.get('/product/:productId', productController.getProductById);
 
+// Route for getting not confirmed products
+router.get('/notConfirmedProducts', authenticateToken, productController.getNotConfirmedProducts);
+
+// Route for confirming a product
+router.put('/product/confirm/:productId',authenticateToken, productController.confirmProduct);
+
 module.exports = router;

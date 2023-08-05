@@ -1,4 +1,6 @@
+const Category = require('../models/category');
 const Product = require('../models/product');
+const User = require('../models/user');
 const { shuffleArray } = require('../utils/productUtils');
 
 // Service function to add a new product
@@ -6,9 +8,10 @@ async function addProduct(photo, name, quantity, description, rate, price, userI
   try {
     const product = new Product({ photo, name, quantity, description, rate, price, userId: userId });
     await product.save();
+
     return product;
   } catch (error) {
-    throw new Error('Failed to add product');
+    throw new Error('Failed to add product ' + error.message);
   }
 }
 
@@ -27,7 +30,7 @@ async function updateProduct(productId, price, description, userId) {
     try {
       const product = await Product.findOneAndUpdate(
         { _id: productId, userId: userId },
-        { price, description },
+        { price: price, description: description },
         { new: true }
       );
   
@@ -69,7 +72,7 @@ async function deleteAllProducts(userId) {
 // Service function to get all products for all users randomly
 async function getAllProductsRandomOrder() {
   try {
-    const products = await Product.find();
+    const products = await Product.find({ status: true });
     return shuffleArray(products);
   } catch (error) {
     throw new Error('Failed to retrieve products');
@@ -124,6 +127,46 @@ async function getProductById(productId) {
   }
 }
 
+// Service function to get not confirmed products
+async function getNotConfirmedProducts() {
+  try {
+    const products = await Product.find({ status: false });
+
+    const userIds = products.map(product => product.userId);
+
+    const users = await User.find({ _id: { $in: userIds } }, 'userName');
+
+    // Map the userName to each product
+    const productsWithUserName = products.map(product => {
+      const user = users.find(user => user._id.equals(product.userId));
+      return { ...product.toObject(), userName: user.userName };
+    });
+
+    return productsWithUserName;
+  } catch (error) {
+    throw new Error('Failed to retrieve products');
+  }
+}
+
+// Service function to confirm a product
+async function confirmProduct(productId, category) {
+  try {
+    const product = await Product.findOneAndUpdate(
+      { _id: productId },
+      { category: category, status: true },
+      { new: true }
+    );
+
+    if(!product) {
+      throw new Error('Product not found');
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error('Failed to confirm product ' + error.message);
+  }
+}
+
 module.exports = {
   addProduct,
   getProducts,
@@ -133,5 +176,7 @@ module.exports = {
   getAllProductsRandomOrder,
   increaseQuantity,
   decreaseQuantity,
-  getProductById
+  getProductById,
+  getNotConfirmedProducts,
+  confirmProduct
 };

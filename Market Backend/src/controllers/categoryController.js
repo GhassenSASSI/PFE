@@ -2,10 +2,10 @@ const categoryService = require('../services/categoryService');
 
 // Controller function to add a category
 async function addCategory(req, res) {
-    const { name } = req.body;
+    const { name, parentId } = req.body;
   
     try {
-      const category = await categoryService.addCategory(name);
+      const category = await categoryService.addCategory(name, parentId);
       res.status(201).json(category);
     } catch (error) {
       res.status(500).json({ error: error.message });

@@ -1,0 +1,148 @@
+$backgroundStartColor: rgba(149, 11, 11, 0.8); // Couleur de départ avec transparence (dans cet exemple, 0.8)
+$backgroundEndColor: rgba(68, 6, 6, 0.8); // Couleur de fin avec transparence (dans cet exemple, 0.8)
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: "";
+  display: inline-block;
+  height: 0.35em;
+  left: 0.15em;
+  top: 0.3em;
+  vertical-align: top;
+  width: 0.35em;
+}
+
+.sidebar {
+  height: 100vh;
+  transition: 0.3s;
+  width: 60px;
+
+  &.expanded {
+    width: 100%;
+
+    .header {
+      h1 {
+        margin-left: 0px;
+      }
+      .chevron {
+        margin-left: 0px;
+        &::before {
+          transform: rotate(-135deg);
+        }
+      }
+    }
+    .content {
+      .link {
+        .content {
+          .title {
+            max-width: 100px;
+          }
+          .icon {
+            margin-right: 3px;
+          }
+        }
+        .children {
+          //.content {
+            padding-left: 20px;
+          //}
+        }
+      }
+    }
+  }
+
+  background: linear-gradient(to right, $backgroundStartColor, $backgroundEndColor);
+  color: mix($backgroundStartColor, $backgroundEndColor); // Cette fonction mélange les deux couleurs du dégradé
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    //background: linear-gradient(to right, $backgroundStartColor, $backgroundEndColor);
+
+    h1 {
+      font-size: 20px;
+      color: mix($backgroundStartColor, $backgroundEndColor); // Mélange de la couleur de texte en fonction du dégradé
+      margin: 0;
+      flex: 1;
+      transition: 0.3s;
+      margin-left: -100px;
+    }
+
+    .chevron {
+      color: mix($backgroundStartColor, $backgroundEndColor); // Mélange de la couleur de la flèche en fonction du dégradé
+      cursor: pointer;
+      transition: 0.3s;
+      margin-left: -25px;
+      padding: 10px;
+      min-width: 20px;
+      height: 20px;
+      display: block;
+      text-align: center;
+
+      &::before {
+        transition: 0.3s;
+        transform: rotate(45deg);
+      }
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  .content {
+    .link {
+      .children {
+        .content {
+          padding-left: 30px;
+
+          &.active {
+            background: mix($backgroundStartColor, $backgroundEndColor); // Mélange de la couleur active en fonction du dégradé
+          }
+        }
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background: linear-gradient(to right, $backgroundStartColor, $backgroundEndColor);
+          .title {
+            color: white;
+          }
+          svg {
+            fill: white;
+          }
+        }
+
+        &.active {
+          background: mix($backgroundStartColor, $backgroundEndColor); // Mélange de la couleur active en fonction du dégradé
+          .title {
+            color: white;
+          }
+        }
+
+        .icon {
+          flex: 0 0 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 0px;
+        }
+        .title {
+          flex: 1;
+          color: mix($backgroundStartColor, $backgroundEndColor); // Mélange de la couleur de texte en fonction du dégradé
+          transition: 0.3s;
+          max-width: 0px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
