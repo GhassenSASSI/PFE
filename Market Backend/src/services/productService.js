@@ -2,13 +2,14 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const User = require('../models/user');
 const { shuffleArray } = require('../utils/productUtils');
+const { getIO } = require('../socketManager');
 
 // Service function to add a new product
 async function addProduct(photo, name, quantity, description, rate, price, userId) {
   try {
     const product = new Product({ photo, name, quantity, description, rate, price, userId: userId });
     await product.save();
-
+    getIO().emit('newProduct', product);
     return product;
   } catch (error) {
     throw new Error('Failed to add product ' + error.message);

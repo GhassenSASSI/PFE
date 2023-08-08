@@ -22,6 +22,16 @@ async function getAllCategories(req, res) {
     }
 }
 
+// Controller function to get all categories
+async function getCategories(req, res) {
+  try {
+    const categories = await categoryService.getCategories();
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 // Controller function to delete a category
 async function deleteCategory(req, res) {
     const { categoryId } = req.params;
@@ -37,5 +47,6 @@ async function deleteCategory(req, res) {
 module.exports = {
     addCategory,
     getAllCategories,
+    getCategories,
     deleteCategory
 }

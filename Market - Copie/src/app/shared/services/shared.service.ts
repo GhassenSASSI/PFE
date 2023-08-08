@@ -13,11 +13,17 @@ export class SharedService {
   isAdmin: boolean = false;
   products: any[] = [];
   dataReady: boolean = false;
+  productId: string = '';
+  productConfirmed: boolean = false;
 
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<any> {
     return this.http.get(environment.baseApi + 'categories/categories')
+  }
+
+  getAllCategories(): Observable<any> {
+    return this.http.get(environment.baseApi + 'categories/allCategories')
   }
 
   setBoolValue(value:boolean) {
@@ -66,5 +72,21 @@ export class SharedService {
 
   getDataReady(): boolean {
     return this.dataReady;
+  }
+
+  setProductId(value: string) {
+    this.productId = value;
+  }
+
+  getProductId(): string {
+    return this.productId;
+  }
+
+  setProductConfirmed(value: boolean) {
+    this.productConfirmed = value;
+  }
+
+  getProductConfirmed(): boolean {
+    return this.productConfirmed;
   }
 }

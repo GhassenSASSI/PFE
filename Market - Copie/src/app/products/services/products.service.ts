@@ -54,4 +54,8 @@ export class ProductsService {
   getNotConfirmedProducts(): Observable<any> {
     return this.api.sendAuthorizedRequest('products/notConfirmedProducts', 'GET')
   }
+
+  confirmProduct(productId: string, category: any): Observable<any> {
+    return this.api.sendAuthorizedRequest(`products/product/confirm/${productId}`, 'PUT', category)
+  }
 }

@@ -9,6 +9,7 @@ import { MyProductsComponent } from './components/my-products/my-products.compon
 import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
 import { UpdateProductModalComponent } from './components/update-product-modal/update-product-modal.component';
 import { NotConfirmedProductComponent } from './components/not-confirmed-product/not-confirmed-product.component';
+import { ConfirmProductModalComponent } from './components/confirm-product-modal/confirm-product-modal.component';
 
 
 
@@ -21,7 +22,8 @@ import { NotConfirmedProductComponent } from './components/not-confirmed-product
     MyProductsComponent,
     AddProductModalComponent,
     UpdateProductModalComponent,
-    NotConfirmedProductComponent
+    NotConfirmedProductComponent,
+    ConfirmProductModalComponent
   ],
   imports: [
     CommonModule,

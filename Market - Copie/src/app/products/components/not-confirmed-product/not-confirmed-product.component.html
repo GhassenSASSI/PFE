@@ -1,7 +1,7 @@
 <div class="box">
     <h1 class="text-danger">Confirm Products</h1>
     <div class="head">
-        <p class="lead">There are <label class="text-danger">1</label> not confirmed product(s)</p>
+        <p class="lead">There are <label class="text-danger">{{products.length}}</label> not confirmed product(s)</p>
         <span class="text-danger card-header">Reject All Products</span>
     </div>
     <table class="table table-striped">
@@ -27,7 +27,7 @@
                 <td><button class="btn btn-primary">View Product</button></td>
                 <td>{{product.exposureDate}}</td>
                 <td>
-                    <button class="btn btn-success">confirm Product</button>
+                    <button class="btn btn-success" (click)="openDialog('1000ms', '1000ms', product._id)">confirm Product</button>
                     <button class="btn btn-danger">Reject Product</button>
                 </td>
             </tr>

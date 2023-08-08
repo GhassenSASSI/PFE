@@ -18,6 +18,7 @@ export class HeaderComponent implements DoCheck{
   isAdmin: boolean = false;
   userName: string = "";
   newOrder: boolean = false;
+  newProduct: boolean = false;
 
   constructor(private sharedService: SharedService, private authService: AuthService, private router: Router, private api: ApiService, private socketService: SocketService) {}
 
@@ -26,6 +27,7 @@ export class HeaderComponent implements DoCheck{
     this.userName = this.sharedService.getUserName();
     this.isAdmin = this.sharedService.getIsAdmin();
     this.newOrder = this.socketService.getNewOrder();
+    this.newProduct = this.socketService.getNewProduct();
   }
 
   startShining() {

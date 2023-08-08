@@ -10,6 +10,9 @@ router.post('/categories', authenticateToken, categoryController.addCategory);
 // Route for getting all categories
 router.get('/categories', categoryController.getAllCategories);
 
+// Route for getting all categories
+router.get('/allCategories', categoryController.getCategories);
+
 // Route for deleting a category
 router.delete('/categories/:categoryId', authenticateToken, categoryController.deleteCategory);
 

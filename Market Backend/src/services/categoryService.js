@@ -46,6 +46,22 @@ async function getAllCategories() {
   }
 }
 
+// Service function to get all categories
+async function getCategories() {
+  try {
+    const categories = await Category.find();
+
+    if(categories) {
+      return categories;
+    }
+
+    return 'there are no categories found';
+    
+  } catch (error) {
+    throw new Error('Failed to get categories');
+  }
+}
+
 // Service function to delete a category
 async function deleteCategory(categoryId) {
     try {
@@ -64,5 +80,6 @@ async function deleteCategory(categoryId) {
 module.exports = {
     addCategory,
     getAllCategories,
+    getCategories,
     deleteCategory
 }
